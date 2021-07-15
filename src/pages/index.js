@@ -1,6 +1,7 @@
 import * as React from 'react'
 // import {Link} from 'gatsby'
 import Layout from './components/layout'
+import { StaticImage } from 'gatsby-plugin-image'
 
 // styles
 const pageStyles = {
@@ -132,6 +133,10 @@ const IndexPage = () => {
   return (
     <Layout pageTitle="Home Page">
       <p>I'm making this by following the Gatsby Tutorial.</p>
+      <StaticImage
+      alt="green screen image"
+      src="../images/スクリーンショット 2020-10-17 17.15.17.png"
+      />
     </Layout>
   )
 }
