@@ -1,7 +1,8 @@
 import * as React from 'react'
 // import {Link} from 'gatsby'
 import Layout from './components/layout'
-import { StaticImage } from 'gatsby-plugin-image'
+import PostLink from "./components/post-link"
+import { graphql } from "gatsby"
 
 // styles
 const pageStyles = {
@@ -129,16 +130,35 @@ const links = [
 ]
 
 // markup
-const IndexPage = () => {
+export default function Home({ data }) {
   return (
     <Layout pageTitle="Home Page">
-      <p>I'm making this by following the Gatsby Tutorial.</p>
-      <StaticImage
-      alt="green screen image"
-      src="../images/スクリーンショット 2020-10-17 17.15.17.png"
-      />
+      {data.allContentfulPost.edges.map(edge =>
+        <PostLink key={edge.node.slug} post={edge.node} />
+      )}
     </Layout>
   )
 }
 
-export default IndexPage
+export const query = graphql`
+    query allContentfulPost {
+      allContentfulPost {
+        edges {
+          node {
+            title
+            image {
+              title
+              file {
+                url
+              }
+            }
+            description {
+              description
+            }
+            slug
+            updatedAt(locale: "ja-JP", formatString: "YYYY年MM月DD日")
+          }
+        }
+      }
+    }
+`
